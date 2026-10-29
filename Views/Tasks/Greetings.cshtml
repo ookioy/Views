@@ -1,0 +1,38 @@
+@{
+    ViewData["Title"] = "Greetings - ViewTask";
+
+    string myMessage = "Hello C# Marathon!";
+    string greetingMsg = "Welcome to our project!";
+
+    DateTime now = DateTime.Now;
+    string currentDay = now.DayOfWeek.ToString();
+
+    string timeGreeting = "Good Evening!";
+    if (now.Hour >= 6 && now.Hour < 12)
+    {
+        timeGreeting = "Good Morning!";
+    }
+    else if (now.Hour >= 12 && now.Hour < 18)
+    {
+        timeGreeting = "Good Afternoon!";
+    }
+}
+
+<h2>Greetings</h2>
+<p>The value of myMessage is: @myMessage</p>
+<p>The greeting is: @greetingMsg</p>
+<p>Here in Ukraine: <u>@currentDay</u></p>
+<p>We wish you: <u>@timeGreeting</u></p>
+<p>Today is <u>@currentDay</u></p>
+
+<table class="table table-bordered" style="width: 200px;">
+    <thead>
+        <tr><th>Name</th><th>Value</th></tr>
+    </thead>
+    <tbody>
+        <tr><td>Day</td><td>@now.Day</td></tr>
+        <tr><td>Hour</td><td>@now.Hour</td></tr>
+        <tr><td>Minute</td><td>@now.Minute</td></tr>
+        <tr><td>Second</td><td>@now.Second</td></tr>
+    </tbody>
+</table>

@@ -1,0 +1,58 @@
+@{
+    ViewData["Title"] = "ShoppingCart - ViewTask";
+    
+    var supermarkets = ViewBag.Supermarkets as List<string> ?? new List<string>();
+    var products = ViewBag.Products as IEnumerable<string> ?? new List<string>();
+    
+    DateTime today = DateTime.Today;
+    var dates = new[]
+    {
+        today.ToString("M/d/yyyy 12:00:00 AM"),
+        today.AddDays(1).ToString("M/d/yyyy 12:00:00 AM"),
+        today.AddDays(2).ToString("M/d/yyyy 12:00:00 AM")
+    };
+}
+
+<h2>Your shopping cart</h2>
+
+@if (ViewBag.Message != null)
+{
+    <div class="alert alert-info">
+        @ViewBag.Message
+    </div>
+}
+else
+{
+    @using (Html.BeginForm("ShoppingCart", "Tasks", FormMethod.Post))
+    {
+        <div class="form-group mb-2">
+            <label>Input your fullname:</label><br />
+            @Html.TextBox("fullname", null, new { @class = "form-control", style = "width:300px;" })
+        </div>
+
+        <div class="form-group mb-2">
+            <label>Input your address :</label><br />
+            @Html.TextBox("address", null, new { @class = "form-control", style = "width:300px;" })
+        </div>
+
+        <div class="form-group mb-2">
+            @Html.DropDownList("supermarket", new SelectList(supermarkets), new { @class = "form-select", style = "width:200px;" })
+        </div>
+
+        <div class="form-group mb-2">
+            @foreach (var date in dates)
+            {
+                <div>
+                    @Html.RadioButton("shippingDate", date) @date
+                </div>
+            }
+        </div>
+
+        <div class="form-group mb-2">
+            @Html.ListBox("selectedProducts", new MultiSelectList(products), new { @class = "form-select", style = "width:200px;", size = "4" })
+        </div>
+
+        <br />
+        <input type="submit" value="Send" class="btn btn-secondary" />
+    }
+}

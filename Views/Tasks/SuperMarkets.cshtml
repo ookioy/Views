@@ -1,0 +1,14 @@
+@{
+    ViewData["Title"] = "SuperMarkets - ViewTask";
+    var markets = ViewBag.Supermarkets as List<string> ?? new List<string>();
+}
+
+<h2>Our Supermarkets</h2>
+<h3>There are @markets.Count markets:</h3>
+
+<ul>
+    @foreach (var market in markets)
+    {
+        <li>@market</li>
+    }
+</ul>
